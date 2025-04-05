@@ -1,6 +1,7 @@
 from qiskit_aer.noise import NoiseModel, pauli_error, depolarizing_error
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, AncillaRegister
 from qiskit_aer import AerSimulator
+
 import numpy as np
 import random
 import time
@@ -46,6 +47,7 @@ def apply_random_logical_gates(circuit, code_register, gate_types='x', n_gates=5
     for _ in range(n_gates):
         gate = random.choice(gate_pool)
         qubits, gate_type = gate
+
 
         if gate_types == 'x':
             for qubit in qubits:
@@ -99,10 +101,12 @@ def seventeen_qubit_planar_code(num_cycles=1, basis='01', n_gates=5):
 
     综合征比特定义如下：
     X 综合征：
+
     S0 = X1 X2
     S1 = X0 X1 X3 X4
     S2 = X4 X5 X7 X8
     S3 = X6 X7
+
 
     Z 综合征：
     S4 = Z0 Z3
@@ -167,6 +171,7 @@ def seventeen_qubit_planar_code(num_cycles=1, basis='01', n_gates=5):
         circuit.measure(code_register[i], output_register[i])
 
     return circuit, cur_state
+
 
 
 # 示例用法

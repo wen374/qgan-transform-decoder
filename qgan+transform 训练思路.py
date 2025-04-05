@@ -1,3 +1,4 @@
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -6,6 +7,7 @@ from dataset import SurfaceCodeDataset
 from model import SurfaceCodeDecoder  # Transformer 模型
 from qiskit_aer import AerSimulator
 from qiskit_aer.noise import NoiseModel
+
 from simulate import get_noise
 import pennylane as qml
 
@@ -23,6 +25,7 @@ class Discriminator(nn.Module):
             nn.Linear(16, 1),
             nn.Sigmoid(),
         )
+
     def forward(self, x):
         return self.model(x)
 
@@ -111,6 +114,7 @@ for epoch in range(num_epochs_qgan):
         g_loss = criterion(fake_outputs, real_labels)
         g_loss.backward()
         optG.step()
+
 
         generated_syndrome_data.append(fake_data.detach().cpu())
 
